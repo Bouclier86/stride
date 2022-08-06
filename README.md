@@ -2,7 +2,7 @@
 Set up a relayer / ibc channel
 
 <p align="center">
-  <img height="100" height="auto" src="(https://github.com/Bouclier86/stride/blob/8b65b5beeeb08eb19203bffc8ce0dac3b7efb84d/images/stride_logo.png)">
+  <img height="100" height="auto" src="https://github.com/Bouclier86/stride/blob/8b65b5beeeb08eb19203bffc8ce0dac3b7efb84d/images/stride_logo.png">
 </p>
 
 # Set up a relayer / ibc channel with another testnet
