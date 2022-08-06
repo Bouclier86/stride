@@ -6,14 +6,22 @@ Set up a relayer / ibc channel
 </p>
 
 # Set up a relayer / ibc channel with another testnet
-In current example we will learn how to set up IBC relayer between two cosmos chains.
+In current example we will learn how to set up IBC relayer between two cosmos chains. In my case it's Gaia and Stride.
 
 ## Preparation before you start
 Before setting up relayer you need to make sure you already have:
-1. Fully synchronized RPC nodes for each Cosmos project you want to connect. In my case it's Gaia and Stride.
-2. RPC enpoints should be exposed and available from hermes instance.
-3. Indexing is set to `kv` and is enabled on each node — indexer = "kv"
-4. For each chain you will need to have wallets that are funded with tokens. This wallets will be used to do all relayer stuff and pay commission.
+1. Fully synchronized RPC nodes for each Cosmos project you want to connect. Commands for checking synchronization:
+Stride:
+```
+strided status 2>&1 | jq .SyncInfo
+```
+Gaia:
+```
+gaiad status 2>&1 | jq .SyncInfo
+```
+3. RPC enpoints should be exposed and available from hermes instance.
+4. Indexing is set to `kv` and is enabled on each node — indexer = "kv"
+5. For each chain you will need to have wallets that are funded with tokens. This wallets will be used to do all relayer stuff and pay commission.
 
 ## Update system
 ```
@@ -26,7 +34,7 @@ sudo apt install unzip -y
 ```
 
 ## Set up variables
-All settings below are just example for IBC Relayer between stride `STRIDE-TESTNET-2` and juno `GAIA` testnets. Please, fill with your own values. You can find your RPC_ADDR from /root/<.NODE_NAME>/config/config.toml and GRPC_ADDR from /root/.<.NODE_NAME>/config/app.toml
+All settings below are just example for IBC Relayer between stride `STRIDE-TESTNET-2` and `GAIA` testnets. Please, fill with your own values. You can find your RPC_ADDR from /root/<.NODE_NAME>/config/config.toml and GRPC_ADDR from /root/.<.NODE_NAME>/config/app.toml
 ```
 RELAYER_NAME='Boúcliér86#6449' # Add your Discord username here
 ```
