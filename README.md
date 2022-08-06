@@ -11,6 +11,7 @@ In current example we will learn how to set up IBC relayer between two cosmos ch
 ## Preparation before you start
 Before setting up relayer you need to make sure you already have:
 1. Fully synchronized RPC nodes for each Cosmos project you want to connect. Commands for checking synchronization:
+
 Stride:
 ```
 strided status 2>&1 | jq .SyncInfo
@@ -19,6 +20,7 @@ Gaia:
 ```
 gaiad status 2>&1 | jq .SyncInfo
 ```
+
 3. RPC enpoints should be exposed and available from hermes instance.
 4. Indexing is set to `kv` and is enabled on each node — indexer = "kv"
 5. For each chain you will need to have wallets that are funded with tokens. This wallets will be used to do all relayer stuff and pay commission.
