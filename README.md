@@ -180,9 +180,7 @@ hermes health-check
 ```
 
 Healthy output should look like:
-```
 ![image](https://github.com/Bouclier86/stride/blob/029720679a759f4bf81e5db8fe488a5cdbddc680/images/health-check.png)
-```
 
 ## Recover wallets using mnemonic files
 Before you proceed with this step, please make sure you have created and funded with tokens seperate wallets on each chain
