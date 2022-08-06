@@ -3,7 +3,7 @@ Set up a relayer / ibc channel.
 
 
 <p align="center">
-  <img height="100" height="auto" src="https://user-images.githubusercontent.com/50621007/177221972-75fcf1b3-6e95-44dd-b43e-e32377685af8.png">
+  <img height="100" height="auto" src="https://github.com/Bouclier86/stride/blob/011f5a6438ac904fa706bd116e15166f33e9b644/images/stride_logo.png">
 </p>
 
 # Setup GO Relayer v2 between Stride and GAIA
