@@ -1,4 +1,4 @@
-# stride
+# Stride-testnet. Task #8
 Set up a relayer / ibc channel
 
 <p align="center">
@@ -10,9 +10,9 @@ In current example we will learn how to set up IBC relayer between two cosmos ch
 
 ## Preparation before you start
 Before setting up relayer you need to make sure you already have:
-1. Fully synchronized RPC nodes for each Cosmos project you want to connect. In my case it's Gaia and Stride
+1. Fully synchronized RPC nodes for each Cosmos project you want to connect. In my case it's Gaia and Stride.
 2. RPC enpoints should be exposed and available from hermes instance.
-3. Indexing is set to `kv` and is enabled on each node.
+3. Indexing is set to `kv` and is enabled on each node — indexer = "kv"
 4. For each chain you will need to have wallets that are funded with tokens. This wallets will be used to do all relayer stuff and pay commission.
 
 ## Update system
@@ -26,31 +26,31 @@ sudo apt install unzip -y
 ```
 
 ## Set up variables
-All settings below are just example for IBC Relayer between stride `STRIDE-TESTNET-2` and juno `GAIA` testnets. Please fill with your own values.
+All settings below are just example for IBC Relayer between stride `STRIDE-TESTNET-2` and juno `GAIA` testnets. Please, fill with your own values.
 ```
-RELAYER_NAME='kjnodes#8455' # add your Discord username here
-```
-
-### Chain A
-```
-CHAIN_ID_A='STRIDE-TESTNET-2'
-RPC_ADDR_A='127.0.0.1:16657'
-GRPC_ADDR_A='127.0.0.1:16090'
-ACCOUNT_PREFIX_A='stride'
-TRUSTING_PERIOD_A='8hours'
-DENOM_A='ustrd'
-MNEMONIC_A='speed rival market sure decade call silly flush derive story state menu inflict catalog habit swallow anxiety lumber siege fuel engage kite dad harsh'
+RELAYER_NAME='Boúcliér86#6449' # Add your Discord username here
 ```
 
-### Chain B
+### Chain S
 ```
-CHAIN_ID_B='GAIA'
-RPC_ADDR_B='127.0.0.1:23657'
-GRPC_ADDR_B='127.0.0.1:23090'
-ACCOUNT_PREFIX_B='cosmos'
-TRUSTING_PERIOD_B='8hours'
-DENOM_B='uatom'
-MNEMONIC_B='speed rival market sure decade call silly flush derive story state menu inflict catalog habit swallow anxiety lumber siege fuel engage kite dad harsh'
+CHAIN_ID_S='STRIDE-TESTNET-2'
+RPC_ADDR_S='127.0.0.1:16657'
+GRPC_ADDR_S='127.0.0.1:16090'
+ACCOUNT_PREFIX_S='stride'
+TRUSTING_PERIOD_S='8hours'
+DENOM_S='ustrd'
+MNEMONIC_S='<YOUR MNEMONIC>'
+```
+
+### Chain G
+```
+CHAIN_ID_G='GAIA'
+RPC_ADDR_G='127.0.0.1:23657'
+GRPC_ADDR_G='127.0.0.1:23090'
+ACCOUNT_PREFIX_G='cosmos'
+TRUSTING_PERIOD_G='8hours'
+DENOM_G='uatom'
+MNEMONIC_G='<YOUR MNEMONIC>'
 ```
 
 ## Make hermes home dir
@@ -104,25 +104,25 @@ host = '127.0.0.1'
 port = 3001
 
 [[chains]]
-### CHAIN_A ###
-id = '${CHAIN_ID_A}'
-rpc_addr = 'http://${RPC_ADDR_A}'
-grpc_addr = 'http://${GRPC_ADDR_A}'
-websocket_addr = 'ws://${RPC_ADDR_A}/websocket'
+### CHAIN_S ###
+id = '${CHAIN_ID_S}'
+rpc_addr = 'http://${RPC_ADDR_S}'
+grpc_addr = 'http://${GRPC_ADDR_S}'
+websocket_addr = 'ws://${RPC_ADDR_S}/websocket'
 rpc_timeout = '10s'
-account_prefix = '${ACCOUNT_PREFIX_A}'
+account_prefix = '${ACCOUNT_PREFIX_S}'
 key_name = 'wallet'
 address_type = { derivation = 'cosmos' }
 store_prefix = 'ibc'
 default_gas = 100000
 max_gas = 2500000
-gas_price = { price = 0.0025, denom = '${DENOM_A}' }
+gas_price = { price = 0.0025, denom = '${DENOM_S}' }
 gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 2097152
 clock_drift = '5s'
 max_block_time = '30s'
-trusting_period = '${TRUSTING_PERIOD_A}'
+trusting_period = '${TRUSTING_PERIOD_S}'
 trust_threshold = { numerator = '1', denominator = '3' }
 memo_prefix = '${RELAYER_NAME}'
 [chains.packet_filter]
@@ -133,25 +133,25 @@ list = [
 ]
 
 [[chains]]
-### CHAIN_B ###
-id = '${CHAIN_ID_B}'
-rpc_addr = 'http://${RPC_ADDR_B}'
-grpc_addr = 'http://${GRPC_ADDR_B}'
-websocket_addr = 'ws://${RPC_ADDR_B}/websocket'
+### CHAIN_G ###
+id = '${CHAIN_ID_G}'
+rpc_addr = 'http://${RPC_ADDR_G}'
+grpc_addr = 'http://${GRPC_ADDR_G}'
+websocket_addr = 'ws://${RPC_ADDR_G}/websocket'
 rpc_timeout = '10s'
-account_prefix = '${ACCOUNT_PREFIX_B}'
+account_prefix = '${ACCOUNT_PREFIX_G}'
 key_name = 'wallet'
 address_type = { derivation = 'cosmos' }
 store_prefix = 'ibc'
 default_gas = 100000
 max_gas = 2500000
-gas_price = { price = 0.0025, denom = '${DENOM_B}' }
+gas_price = { price = 0.0025, denom = '${DENOM_G}' }
 gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 2097152
 clock_drift = '5s'
 max_block_time = '30s'
-trusting_period = '${TRUSTING_PERIOD_B}'
+trusting_period = '${TRUSTING_PERIOD_G}'
 trust_threshold = { numerator = '1', denominator = '3' }
 memo_prefix = '${RELAYER_NAME}'
 [chains.packet_filter]
@@ -171,33 +171,28 @@ hermes health-check
 
 Healthy output should look like:
 ```
-2022-07-21T19:38:15.571398Z  INFO ThreadId(01) using default configuration from '/root/.hermes/config.toml'
-2022-07-21T19:38:15.573884Z  INFO ThreadId(01) [STRIDE-TESTNET-2] performing health check...
-2022-07-21T19:38:15.614273Z  INFO ThreadId(01) chain is healthy chain=STRIDE-TESTNET-2
-2022-07-21T19:38:15.614313Z  INFO ThreadId(01) [GAIA] performing health check...
-2022-07-21T19:38:15.627747Z  INFO ThreadId(01) chain is healthy chain=GAIA
-Success: performed health check for all chains in the config
+![image](https://github.com/Bouclier86/stride/blob/029720679a759f4bf81e5db8fe488a5cdbddc680/images/health-check.png)
 ```
 
 ## Recover wallets using mnemonic files
 Before you proceed with this step, please make sure you have created and funded with tokens seperate wallets on each chain
 ```
-sudo tee $HOME/.hermes/${CHAIN_ID_A}.mnemonic > /dev/null <<EOF
-${MNEMONIC_A}
+sudo tee $HOME/.hermes/${CHAIN_ID_S}.mnemonic > /dev/null <<EOF
+${MNEMONIC_S}
 EOF
-sudo tee $HOME/.hermes/${CHAIN_ID_B}.mnemonic > /dev/null <<EOF
-${MNEMONIC_B}
+sudo tee $HOME/.hermes/${CHAIN_ID_G}.mnemonic > /dev/null <<EOF
+${MNEMONIC_G}
 EOF
-hermes keys add --chain ${CHAIN_ID_A} --mnemonic-file $HOME/.hermes/${CHAIN_ID_A}.mnemonic
-hermes keys add --chain ${CHAIN_ID_B} --mnemonic-file $HOME/.hermes/${CHAIN_ID_B}.mnemonic
+hermes keys add --chain ${CHAIN_ID_S} --mnemonic-file $HOME/.hermes/${CHAIN_ID_S}.mnemonic
+hermes keys add --chain ${CHAIN_ID_G} --mnemonic-file $HOME/.hermes/${CHAIN_ID_G}.mnemonic
 ```
 
 Successful output should look like:
 ```
 2022-07-21T19:54:13.778550Z  INFO ThreadId(01) using default configuration from '/root/.hermes/config.toml'
-Success: Restored key 'wallet' (stride1eardm7w7v9el9d3khkwlj9stdj9hexnfv8pea8) on chain STRIDE-TESTNET-2
+Success: Restored key 'wallet' (<YOUR_STRIDE_ADDRESS>) on chain STRIDE-TESTNET-2
 2022-07-21T19:54:14.956171Z  INFO ThreadId(01) using default configuration from '/root/.hermes/config.toml'
-Success: Restored key 'wallet' (juno1ypnerpxuqezq2vfqxm74ddkuqnektveezh5uaa) on chain GAIA
+Success: Restored key 'wallet' (<YOUR_COSMOS_ADDRESS>) on chain GAIA
 ```
 
 ## Create hermes service daemon
@@ -323,7 +318,7 @@ journalctl -u hermesd -f -o cat
 2022-07-27T22:44:20.902852Z  INFO ThreadId(453) packet_cmd{src_chain=GAIA src_port=icahost src_channel=channel-4 dst_chain=STRIDE-TESTNET-2}:relay{odata=d169839a ->Destination @0-16135; len=1}: success
 ```
 
-You also should see `Update Client (Ibc)` transactions appearing in the explorer https://stride.explorers.guru/account/<STRIDE_WALLET_ADDRESS>
+You also should see `Update Client (Ibc)` transactions appearing in the explorer https://stride.explorers.guru/account/<YOUR_STRIDE_ADDRESS>
 
 ![image](https://github.com/Bouclier86/stride/blob/a14e586027a521b70d018d19c2c676ea4423a88f/images/irc-1.png)
 ![image](https://github.com/Bouclier86/stride/blob/a14e586027a521b70d018d19c2c676ea4423a88f/images/irc-2.png)
