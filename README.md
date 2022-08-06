@@ -6,16 +6,14 @@ Set up a relayer / ibc channel
 </p>
 
 # Set up a relayer / ibc channel with another testnet
-In current example we will learn how to set up IBC relayer between two cosmos chains
+In current example we will learn how to set up IBC relayer between two cosmos chains.
 
 ## Preparation before you start
 Before setting up relayer you need to make sure you already have:
-1. Fully synchronized RPC nodes for each Cosmos project you want to connect
-- [Stride node setup guide](https://github.com/kj89/testnet_manuals/blob/main/stride/README.md)
-- [GAIA node setup guide](https://github.com/kj89/testnet_manuals/tree/main/stride/GAIA/README.md)
-2. RPC enpoints should be exposed and available from hermes instance
-3. Indexing is set to `kv` and is enabled on each node
-4. For each chain you will need to have wallets that are funded with tokens. This wallets will be used to do all relayer stuff and pay commission
+1. Fully synchronized RPC nodes for each Cosmos project you want to connect. In my case it's Gaia and Stride
+2. RPC enpoints should be exposed and available from hermes instance.
+3. Indexing is set to `kv` and is enabled on each node.
+4. For each chain you will need to have wallets that are funded with tokens. This wallets will be used to do all relayer stuff and pay commission.
 
 ## Update system
 ```
@@ -327,5 +325,5 @@ journalctl -u hermesd -f -o cat
 
 You also should see `Update Client (Ibc)` transactions appearing in the explorer https://stride.explorers.guru/account/<STRIDE_WALLET_ADDRESS>
 
-![image](https://www.upload.ee/files/14394537/irc-1.png.html)
-![image](https://www.upload.ee/files/14394540/irc-2.png.html)
+![image](https://github.com/Bouclier86/stride/blob/a14e586027a521b70d018d19c2c676ea4423a88f/images/irc-1.png)
+![image](https://github.com/Bouclier86/stride/blob/a14e586027a521b70d018d19c2c676ea4423a88f/images/irc-2.png)
