@@ -26,7 +26,7 @@ sudo apt install unzip -y
 ```
 
 ## Set up variables
-All settings below are just example for IBC Relayer between stride `STRIDE-TESTNET-2` and juno `GAIA` testnets. Please, fill with your own values.
+All settings below are just example for IBC Relayer between stride `STRIDE-TESTNET-2` and juno `GAIA` testnets. Please, fill with your own values. You can find your RPC_ADDR from /root/<.NODE_NAME>/config/config.toml and GRPC_ADDR from /root/.<.NODE_NAME>/config/app.toml
 ```
 RELAYER_NAME='Boúcliér86#6449' # Add your Discord username here
 ```
@@ -34,8 +34,8 @@ RELAYER_NAME='Boúcliér86#6449' # Add your Discord username here
 ### Chain S
 ```
 CHAIN_ID_S='STRIDE-TESTNET-2'
-RPC_ADDR_S='127.0.0.1:16657'
-GRPC_ADDR_S='127.0.0.1:16090'
+RPC_ADDR_S='127.0.0.1:26657'
+GRPC_ADDR_S='127.0.0.1:9090'
 ACCOUNT_PREFIX_S='stride'
 TRUSTING_PERIOD_S='8hours'
 DENOM_S='ustrd'
