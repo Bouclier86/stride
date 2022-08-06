@@ -1,22 +1,33 @@
 # Stride-testnet. Task #8
-Set up a relayer / ibc channel.
+Setup GO Relayer.v2 between Stride and GAIA.
 
 
 <p align="center">
   <img height="100" height="auto" src="https://github.com/Bouclier86/stride/blob/011f5a6438ac904fa706bd116e15166f33e9b644/images/stride_logo.png">
 </p>
 
-# Setup GO Relayer v2 between Stride and GAIA
-In current example we will learn how to set up GO Relayer v2 between two cosmos chains
 
-## Preparation before you start
+## Preparation before start
 Before setting up relayer you need to make sure you already have:
-1. Fully synchronized RPC nodes for each Cosmos project you want to connect
-2. RPC enpoints should be exposed and available from relayer instance
+1. Fully synchronized RPC nodes:
+
+Stride synchronization check:
+```
+strided status 2>&1 | jq .SyncInfo
+```
+
+Stride synchronization check:
+```
+strided status 2>&1 | jq .SyncInfo
+```
+
+2. RPC enpoints should be exposed and available from relayer instance.
+
+
 #### RPC configuration is located in `config.toml` file
 ```
 # STRIDE
-laddr = "tcp://0.0.0.0:16657" in $HOME/.stride/config/config.toml
+laddr = "tcp://0.0.0.0:26657" in $HOME/.stride/config/config.toml
 # GAIA
 laddr = "tcp://0.0.0.0:23657" in $HOME/.gaia/config/config.toml  
 ```
@@ -35,18 +46,18 @@ sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $HOME/.gaia/config/config.toml
 ## Set up variables
 All settings below are just example for IBC Relayer between `STRIDE-TESTNET-2` and `GAIA` testnets. Please fill with your own values.
 ```
-RELAYER_ID='kjnodes#8455' # add your Discord username here
+RELAYER_ID='Boúcliér86#6449' # add your Discord username here
 ```
 
 ### STRIDE
 ```
-STRIDE_RPC_ADDR='<YOUR_STRIDE_RPC_ADDR>:<YOUR_STRIDE_RPC_PORT>' # Example: '127.0.0.1:16657'
+STRIDE_RPC_ADDR='<YOUR_STRIDE_RPC_ADDR>:<YOUR_STRIDE_RPC_PORT>' # Example: '127.0.0.1:26657'
 STRIDE_MNEMONIC='your mnemonic goes here'
 ```
 
 ### GAIA
 ```
-GAIA_RPC_ADDR='<YOUR_GAIA_RPC_ADDR>:<YOUR_GAIA_RPC_PORT>' # Example: '127.0.0.1:21657'
+GAIA_RPC_ADDR='<YOUR_GAIA_RPC_ADDR>:<YOUR_GAIA_RPC_PORT>' # Example: '127.0.0.1:23657'
 GAIA_MNEMONIC='your mnemonic goes here'
 ```
 
@@ -78,7 +89,7 @@ rly config init
 ```
 
 ## Create relayer configuration files
-### 1. Generate CHAIN_A config file using variables we have defined above
+### 1. Generate CHAIN_S config file using variables we have defined above
 ```
 sudo tee $HOME/.relayer/stride.json > /dev/null <<EOF
 {
@@ -100,7 +111,7 @@ sudo tee $HOME/.relayer/stride.json > /dev/null <<EOF
 EOF
 ```
 
-### 2. Generate CHAIN_B config file using variables we have defined above
+### 2. Generate CHAIN_G config file using variables we have defined above
 ```
 sudo tee $HOME/.relayer/gaia.json > /dev/null <<EOF
 {
@@ -219,4 +230,4 @@ journalctl -u relayerd -f -o cat
 
 Check your wallet transaction in explorer to find the GO v2 Relayer Update Client(IBC) message:
 
-![image](https://user-images.githubusercontent.com/50621007/183149363-9c5108a5-1e59-400f-ade5-d4aaa12af53e.png)
+![image](https://github.com/Bouclier86/stride/blob/1565f6389d8b8c85e2eace18ea142d3ab2c30396/images/ralayer.png)
