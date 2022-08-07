@@ -4,7 +4,7 @@
 
 # Relay interchain-queries using the new GO Relayer.v2
 
-## 1. Download and build binaries
+## 1. Download and build binaries:
 ```
 cd $HOME
 git clone https://github.com/Stride-Labs/interchain-queries.git
@@ -13,17 +13,18 @@ go build
 sudo mv interchain-queries /usr/local/bin/icq
 ```
 
-## 2. Make home dir for icq and create configurations file.
+## 2. Make home dir for icq and create configurations file:
 ```
 cd $HOME && mkdir .icq
+
 sudo tee $HOME/.icq/config.yaml > /dev/null <<EOF
 default_chain: stride-testnet
 chains:
   gaia-testnet:
     key: wallet
     chain-id: GAIA
-    rpc-addr: http://127.0.0.1:23657      # use your own Stride RPC endpoint here
-    grpc-addr: http://127.0.0.1:23090     # use your own Stride GRPC endpoint here
+    rpc-addr: http://127.0.0.1:23657      # use your own Stride RPC endpoint here. You can find it in — /root/.gaia/config/config.toml
+    grpc-addr: http://127.0.0.1:23090     # use your own Stride GRPC endpoint here. You can find it in — /root/.gaia/config/app.toml
     account-prefix: cosmos
     keyring-backend: test
     gas-adjustment: 1.2
@@ -37,8 +38,8 @@ chains:
   stride-testnet:
     key: wallet
     chain-id: STRIDE-TESTNET-2
-    rpc-addr: http://127.0.0.1:16657      # use your own Gaia GRPC endpoint here
-    grpc-addr: http://127.0.0.1:16090     # use your own Gaia GRPC endpoint here
+    rpc-addr: http://127.0.0.1:26657     # use your own Gaia GRPC endpoint here. You can find it in — /root/.stride/config/config.toml
+    grpc-addr: http://127.0.0.1:9091     # use your own Gaia GRPC endpoint here. You can find it in — /root/.stride/config/app.toml
     account-prefix: stride
     keyring-backend: test
     gas-adjustment: 1.2
@@ -53,14 +54,14 @@ cl: {}
 EOF
 ```
 
-## 3. Import wallets
+## 3. Import wallets:
 > NOTE: Please use the same wallet you have used for relayer task, as it is the only way to prove that icq runs on your behalf!
 ```
 icq keys restore --chain stride-testnet wallet
 icq keys restore --chain gaia-testnet wallet
 ```
 
-## 4. Create icq service
+## 4. Create icq service:
 ```
 sudo tee /etc/systemd/system/icqd.service > /dev/null <<EOF
 [Unit]
@@ -79,19 +80,19 @@ WantedBy=multi-user.target
 EOF
 ```
 
-## 5. Start icq service
+## 5. Start icq service:
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable icqd
 sudo systemctl restart icqd
 ```
 
-## 6. Check icq logs
+## 6. Check icq logs:
 ```
 journalctl -u icqd -f -o cat
 ```
 
-You will have to wait some time until you see some logs (5-15min):
+You will have to wait some time until you see some logs (15min):
 ```
 store/bank/key
 height parsed from GetHeightFromMetadata= 0
@@ -115,7 +116,7 @@ Send batch of 4 messages
 Sent batch of 2 (deduplicated) messages
 ```
 
-After that you can check you transaction in the explorer
+After that you can check you transaction in the explorer:
 
 ![image](https://github.com/Bouclier86/stride/blob/da07691d49efc49da170fb4c3ab860af22ef4698/images/icq-1.png)
 ![image](https://github.com/Bouclier86/stride/blob/da07691d49efc49da170fb4c3ab860af22ef4698/images/icq-2.png)
