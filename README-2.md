@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="100" height="auto" src="(https://github.com/Bouclier86/stride/blob/756bea73a43b44bf170482a7bdca5aad0cc6d561/images/stride_logo.png)">
+  <img height="100" height="auto" src="https://github.com/Bouclier86/stride/blob/756bea73a43b44bf170482a7bdca5aad0cc6d561/images/stride_logo.png">
 </p>
 
 # Relay interchain-queries using the new GO Relayer.v2
