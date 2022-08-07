@@ -1,20 +1,8 @@
-
-<p style="font-size:14px" align="right">
-<a href="https://t.me/kjnotes" target="_blank">Join our telegram <img src="https://user-images.githubusercontent.com/50621007/183283867-56b4d69f-bc6e-4939-b00a-72aa019d1aea.png" width="30"/></a>
-<a href="https://discord.gg/fRVzvPBh" target="_blank">Join our discord <img src="https://user-images.githubusercontent.com/50621007/176236430-53b0f4de-41ff-41f7-92a1-4233890a90c8.png" width="30"/></a>
-<a href="https://kjnodes.com/" target="_blank">Visit our website <img src="https://user-images.githubusercontent.com/50621007/168689709-7e537ca6-b6b8-4adc-9bd0-186ea4ea4aed.png" width="30"/></a>
-</p>
-
-<p style="font-size:14px" align="right">
-<a href="https://hetzner.cloud/?ref=y8pQKS2nNy7i" target="_blank">Deploy your VPS using our referral link to get 20€ bonus <img src="https://user-images.githubusercontent.com/50621007/174612278-11716b2a-d662-487e-8085-3686278dd869.png" width="30"/></a>
-<a href="https://m.do.co/c/17b61545ca3a" target="_blank">Deploy your VPS using our referral link to get 100$ free bonus for 60 days <img src="https://user-images.githubusercontent.com/50621007/183284313-adf81164-6db4-4284-9ea0-bcb841936350.png" width="30"/></a>
-</p>
-
 <p align="center">
   <img height="100" height="auto" src="https://user-images.githubusercontent.com/50621007/183283696-d1c4192b-f594-45bb-b589-15a5e57a795c.png">
 </p>
 
-# Relay interchain-queries using the new GO v2 Relayer
+# Relay interchain-queries using the new GO Relayer.v2
 
 ## 1. Download and build binaries
 ```
@@ -25,7 +13,7 @@ go build
 sudo mv interchain-queries /usr/local/bin/icq
 ```
 
-## 2. Make home dir for icq and create configurations file
+## 2. Make home dir for icq and create configurations file.
 ```
 cd $HOME && mkdir .icq
 sudo tee $HOME/.icq/config.yaml > /dev/null <<EOF
@@ -129,4 +117,5 @@ Sent batch of 2 (deduplicated) messages
 
 After that you can check you transaction in the explorer
 
-![image](https://user-images.githubusercontent.com/50621007/183242421-ca5e8f83-4d54-4ddb-bdbc-31430da23046.png)
+![image](https://github.com/Bouclier86/stride/blob/da07691d49efc49da170fb4c3ab860af22ef4698/images/icq-1.png)
+![image](https://github.com/Bouclier86/stride/blob/da07691d49efc49da170fb4c3ab860af22ef4698/images/icq-2.png)
